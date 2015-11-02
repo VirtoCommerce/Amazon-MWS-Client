@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5C26E2A4-8614-44E6-8CFF-D45A336DAC6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazonMWSClientLib", "src\AmazonMWSClientLib\AmazonMWSClientLib.csproj", "{099F497F-1D93-42DF-94B0-6C83A950220C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{099F497F-1D93-42DF-94B0-6C83A950220C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{099F497F-1D93-42DF-94B0-6C83A950220C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{099F497F-1D93-42DF-94B0-6C83A950220C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{099F497F-1D93-42DF-94B0-6C83A950220C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{099F497F-1D93-42DF-94B0-6C83A950220C} = {5C26E2A4-8614-44E6-8CFF-D45A336DAC6D}
+	EndGlobalSection
+EndGlobal
