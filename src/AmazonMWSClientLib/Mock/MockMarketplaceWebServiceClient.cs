@@ -20,6 +20,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Serialization;
 using MarketplaceWebService.Model;
+using System.Linq;
 
 namespace MarketplaceWebService.Mock
 {
@@ -340,7 +341,10 @@ namespace MarketplaceWebService.Mock
         {
             Type typeObj = typeof(T);
             XmlSerializer serializer = new XmlSerializer(typeObj);
-            Stream xmlStream = Assembly.GetAssembly(this.GetType()).GetManifestResourceStream(xmlResource);
+            //From the assembly where this code lives!
+            var thisResourceNames = this.GetType().Assembly.GetManifestResourceNames();
+                        
+            Stream xmlStream = Assembly.GetAssembly(this.GetType()).GetManifestResourceStream(thisResourceNames.FirstOrDefault(resource => resource.Contains(xmlResource)) ?? xmlResource);
             T response = (T)serializer.Deserialize(xmlStream);
             AddResponseHeaderMetadata(typeObj, response);
             

@@ -206,27 +206,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mock\CancelFeedSubmissionsResponse.xml" />
-    <Content Include="Mock\CancelReportRequestsResponse.xml" />
-    <Content Include="Mock\ErrorResponse.xml" />
-    <Content Include="Mock\GetFeedSubmissionCountResponse.xml" />
-    <Content Include="Mock\GetFeedSubmissionListByNextTokenResponse.xml" />
-    <Content Include="Mock\GetFeedSubmissionListResponse.xml" />
-    <Content Include="Mock\GetFeedSubmissionResultResponse.xml" />
-    <Content Include="Mock\GetReportCountResponse.xml" />
-    <Content Include="Mock\GetReportListByNextTokenResponse.xml" />
-    <Content Include="Mock\GetReportListResponse.xml" />
-    <Content Include="Mock\GetReportRequestCountResponse.xml" />
-    <Content Include="Mock\GetReportRequestListByNextTokenResponse.xml" />
-    <Content Include="Mock\GetReportRequestListResponse.xml" />
-    <Content Include="Mock\GetReportResponse.xml" />
-    <Content Include="Mock\GetReportScheduleCountResponse.xml" />
-    <Content Include="Mock\GetReportScheduleListByNextTokenResponse.xml" />
-    <Content Include="Mock\GetReportScheduleListResponse.xml" />
-    <Content Include="Mock\ManageReportScheduleResponse.xml" />
-    <Content Include="Mock\RequestReportResponse.xml" />
-    <Content Include="Mock\SubmitFeedResponse.xml" />
-    <Content Include="Mock\UpdateReportAcknowledgementsResponse.xml" />
+    <EmbeddedResource Include="Mock\CancelFeedSubmissionsResponse.xml" />
+    <EmbeddedResource Include="Mock\CancelReportRequestsResponse.xml" />
+    <EmbeddedResource Include="Mock\ErrorResponse.xml" />
+    <EmbeddedResource Include="Mock\GetFeedSubmissionCountResponse.xml" />
+    <EmbeddedResource Include="Mock\GetFeedSubmissionListByNextTokenResponse.xml" />
+    <EmbeddedResource Include="Mock\GetFeedSubmissionListResponse.xml" />
+    <EmbeddedResource Include="Mock\GetFeedSubmissionResultResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportCountResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportListByNextTokenResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportListResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportRequestCountResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportRequestListByNextTokenResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportRequestListResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportScheduleCountResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportScheduleListByNextTokenResponse.xml" />
+    <EmbeddedResource Include="Mock\GetReportScheduleListResponse.xml" />
+    <EmbeddedResource Include="Mock\ManageReportScheduleResponse.xml" />
+    <EmbeddedResource Include="Mock\RequestReportResponse.xml" />
+    <EmbeddedResource Include="Mock\SubmitFeedResponse.xml" />
+    <EmbeddedResource Include="Mock\UpdateReportAcknowledgementsResponse.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

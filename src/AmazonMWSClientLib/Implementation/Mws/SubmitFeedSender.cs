@@ -1,5 +1,6 @@
 ﻿using AmazonMWSClientLib.Model.Feeds;
 using MarketplaceWebService;
+using MarketplaceWebService.Mock;
 using MarketplaceWebService.Model;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,12 @@ namespace AmazonMWSClientLib.Implementation.Mws
     /// <summary>
     /// The class can be used to send feeds to amazon using MarkteplaceWebServiceClient
     /// </summary>
-    public static class SubmitFeedSender
+    public class SubmitFeedSender
     {
-        public static IEnumerable<string> SendAmazonFeeds(IEnumerable<Product> amazonUpdateList, AmazonEnvelopeMessageType messageType, AmazonFeedType feedType, string AmazonMerchantId, string AmazonMarketplaceId, string AmazonServiceUrl, string AmazonAccessKeyId, string AmazonSecretAccessKey)
+        public static SubmitFeedResponse SendAmazonFeeds(IEnumerable<Product> amazonUpdateList, AmazonEnvelopeMessageType messageType, AmazonFeedType feedType, string AmazonMerchantId, string AmazonMarketplaceId, string AmazonServiceUrl, string AmazonAccessKeyId, string AmazonSecretAccessKey)
         {
-            var requestResponse = new List<string>();
+            //var requestResponse = new List<string>();
+            SubmitFeedResponse feedResponse = null;
             
             var amazonEnvelope = new AmazonEnvelope { Header = new Header { DocumentVersion = "1.01", MerchantIdentifier = AmazonMerchantId, }, MessageType = messageType };
             var updates = new List<AmazonEnvelopeMessage>();
@@ -32,7 +34,7 @@ namespace AmazonMWSClientLib.Implementation.Mws
             amazonEnvelope.Message = updates.ToArray();
 
             var serializer = new XmlSerializer(amazonEnvelope.GetType());
-
+            
             using (MemoryStream feedStream = new MemoryStream())
             {
                 serializer.Serialize(feedStream, amazonEnvelope);
@@ -46,9 +48,15 @@ namespace AmazonMWSClientLib.Implementation.Mws
                     FeedContent = feedStream
                 };
 
+                // Calculating the MD5 hash value exhausts the stream, and therefore we must either reset the
+                // position, or create another stream for the calculation.
                 feedRequest.ContentMD5 = MarketplaceWebServiceClient.CalculateContentMD5(feedRequest.FeedContent);
                 var feedConfig = new MarketplaceWebServiceConfig { ServiceURL = AmazonServiceUrl };
-                var feedService = new MarketplaceWebServiceClient(AmazonAccessKeyId, AmazonSecretAccessKey, "Virto", "1.01", feedConfig);
+                
+                //var feedService = new MarketplaceWebServiceClient(AmazonAccessKeyId, AmazonSecretAccessKey, "Virto", "1.01", feedConfig);
+
+                var feedService = new MockMarketplaceWebServiceClient();
+
                 var uploadSuccess = false;
                 var retryCount = 0;
 
@@ -56,23 +64,26 @@ namespace AmazonMWSClientLib.Implementation.Mws
                 {
                     try
                     {
-                        var feedResponse = feedService.SubmitFeed(feedRequest);
-                        var submissionId = feedResponse.SubmitFeedResult.FeedSubmissionInfo.FeedSubmissionId;
-                        requestResponse.Add(submissionId);
+                        feedResponse = feedService.SubmitFeed(feedRequest);
+                        //var submissionId = feedResponse.SubmitFeedResult.FeedSubmissionInfo.FeedSubmissionId;
+                        //requestResponse.Add(submissionId);
                         uploadSuccess = true;
-                        Thread.Sleep(120000);
                     }
                     catch (Exception ex)
                     {
+                        //if sending not succeed after 3 attempts stop retrying
                         retryCount++;
                         if (retryCount == 3) break;
+
+                        //pause sending for 3 minutes
                         Thread.Sleep(18000);
                         if (ex.ToString().ToLowerInvariant().Contains("request is throttled")) continue;
-                        requestResponse.Add(string.Format("ERROR: {0}", ex));
+                        //requestResponse.Add(string.Format("ERROR: {0}", ex));
                     }
                 }
             }
-            return requestResponse;
+
+            return feedResponse;
         }
     }
 }

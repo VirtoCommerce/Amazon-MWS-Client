@@ -3,8 +3,8 @@
 ################################################################################
 
 .vs
-/AmazonMWSClientSample/bin
-/AmazonMWSClientSample/obj
+/src/AmazonMWSClientSample/bin
+/src/AmazonMWSClientSample/obj
 /src/AmazonMWSClientLib/bin
 /src/AmazonMWSClientLib/obj
 /packages
