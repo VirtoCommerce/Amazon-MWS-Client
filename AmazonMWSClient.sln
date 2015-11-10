@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5C26E2A4-861
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazonMWSClientLib", "src\AmazonMWSClientLib\AmazonMWSClientLib.csproj", "{099F497F-1D93-42DF-94B0-6C83A950220C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazonMWSClientSample", "src\AmazonMWSClientSample\AmazonMWSClientSample.csproj", "{EA17242C-ED0C-472A-BDAD-61B74664108E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +19,16 @@ Global
 		{099F497F-1D93-42DF-94B0-6C83A950220C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{099F497F-1D93-42DF-94B0-6C83A950220C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{099F497F-1D93-42DF-94B0-6C83A950220C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA17242C-ED0C-472A-BDAD-61B74664108E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA17242C-ED0C-472A-BDAD-61B74664108E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA17242C-ED0C-472A-BDAD-61B74664108E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA17242C-ED0C-472A-BDAD-61B74664108E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{099F497F-1D93-42DF-94B0-6C83A950220C} = {5C26E2A4-8614-44E6-8CFF-D45A336DAC6D}
+		{EA17242C-ED0C-472A-BDAD-61B74664108E} = {5C26E2A4-8614-44E6-8CFF-D45A336DAC6D}
 	EndGlobalSection
 EndGlobal

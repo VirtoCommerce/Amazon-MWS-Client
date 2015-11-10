@@ -46,10 +46,12 @@
     <Compile Include="Attributes\RequestType.cs" />
     <Compile Include="Attributes\ResponseType.cs" />
     <Compile Include="Attributes\StreamType.cs" />
+    <Compile Include="Converters\ProductsToXML.cs" />
     <Compile Include="Implementation\Mws\IMarketplaceWebServiceClient.cs" />
     <Compile Include="Implementation\Mws\MarketplaceWebServiceClient.cs" />
     <Compile Include="Implementation\Mws\MarketplaceWebServiceConfig.cs" />
     <Compile Include="Implementation\Mws\MarketplaceWebServiceException.cs" />
+    <Compile Include="Implementation\Mws\SubmitFeedSender.cs" />
     <Compile Include="Mock\MockMarketplaceWebServiceClient.cs" />
     <Compile Include="Model\CancelFeedSubmissionsRequest.cs" />
     <Compile Include="Model\CancelFeedSubmissionsResponse.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Model\Feeds\AmazonEnvelopeMessage.cs" />
     <Compile Include="Model\Feeds\AmazonEnvelopeMessageType.cs" />
     <Compile Include="Model\Feeds\AmazonEnvelopeOperationMessageType.cs" />
+    <Compile Include="Model\Feeds\AmazonFeedType.cs" />
     <Compile Include="Model\Feeds\AmazonOnly.cs" />
     <Compile Include="Model\Feeds\AmazonVendorOnly.cs" />
     <Compile Include="Model\Feeds\AmperageDimension.cs" />

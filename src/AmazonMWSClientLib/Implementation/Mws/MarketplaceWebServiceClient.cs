@@ -30,6 +30,8 @@ using MarketplaceWebService.Model;
 using MarketplaceWebService;
 using MarketplaceWebService.Attributes;
 using System.Collections.Specialized;
+using AmazonMWSClientLib.Model.Feeds;
+using System.Threading;
 
 namespace MarketplaceWebService
 {
@@ -41,10 +43,11 @@ namespace MarketplaceWebService
     */
     public class MarketplaceWebServiceClient : IMarketplaceWebServiceClient
     {
+        private const string mwsClientVersion = "2014-09-30";
 
-        private String awsAccessKeyId = null;
-        private String awsSecretAccessKey = null;
-        private MarketplaceWebServiceConfig config = null;
+        private readonly string awsAccessKeyId = null;
+        private readonly string awsSecretAccessKey = null;
+        private readonly MarketplaceWebServiceConfig config = null;
 
         /// <summary>
         /// Constructs MarketplaceWebServiceClient with AWS Access Key ID and AWS Secret Key.
@@ -115,8 +118,7 @@ namespace MarketplaceWebService
 
             buildUserAgentHeader(applicationName, applicationVersion, config);
         }
-
-        private const string mwsClientVersion = "2014-09-30";
+        
         
         private void buildUserAgentHeader(
             string applicationName,
@@ -197,8 +199,7 @@ namespace MarketplaceWebService
         {
             return Invoke<UpdateReportAcknowledgementsResponse>(ConvertUpdateReportAcknowledgements(request));
         }
-
-        
+                
         /// <summary>
         /// Submit Feed 
         /// </summary>
