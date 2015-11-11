@@ -53,9 +53,9 @@ namespace AmazonMWSClientLib.Implementation.Mws
                 feedRequest.ContentMD5 = MarketplaceWebServiceClient.CalculateContentMD5(feedRequest.FeedContent);
                 var feedConfig = new MarketplaceWebServiceConfig { ServiceURL = AmazonServiceUrl };
                 
-                //var feedService = new MarketplaceWebServiceClient(AmazonAccessKeyId, AmazonSecretAccessKey, "Virto", "1.01", feedConfig);
+                var feedService = new MarketplaceWebServiceClient(AmazonAccessKeyId, AmazonSecretAccessKey, "Virto", "1.01", feedConfig);
 
-                var feedService = new MockMarketplaceWebServiceClient();
+                //var feedService = new MockMarketplaceWebServiceClient();
 
                 var uploadSuccess = false;
                 var retryCount = 0;

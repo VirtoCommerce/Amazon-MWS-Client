@@ -46,7 +46,6 @@
     <Compile Include="Attributes\RequestType.cs" />
     <Compile Include="Attributes\ResponseType.cs" />
     <Compile Include="Attributes\StreamType.cs" />
-    <Compile Include="Converters\ProductsToXML.cs" />
     <Compile Include="Implementation\Mws\IMarketplaceWebServiceClient.cs" />
     <Compile Include="Implementation\Mws\MarketplaceWebServiceClient.cs" />
     <Compile Include="Implementation\Mws\MarketplaceWebServiceConfig.cs" />
