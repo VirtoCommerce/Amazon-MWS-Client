@@ -15,7 +15,7 @@ namespace AmazonMWSClientLib.Implementation.Mws
     /// </summary>
     public class SubmitFeedSender
     {
-        public static SubmitFeedResponse SendAmazonFeeds(IEnumerable<Product> amazonUpdateList, AmazonEnvelopeMessageType messageType, AmazonFeedType feedType, string AmazonMerchantId, string AmazonMarketplaceId, string AmazonServiceUrl, string AmazonAccessKeyId, string AmazonSecretAccessKey)
+        public static SubmitFeedResponse SendAmazonFeeds(IMarketplaceWebServiceClient feedService, IEnumerable<Product> amazonUpdateList, AmazonEnvelopeMessageType messageType, AmazonFeedType feedType, string AmazonMerchantId, string AmazonMarketplaceId, string AmazonServiceUrl, string AmazonAccessKeyId, string AmazonSecretAccessKey)
         {
             //var requestResponse = new List<string>();
             SubmitFeedResponse feedResponse = null;
@@ -34,7 +34,11 @@ namespace AmazonMWSClientLib.Implementation.Mws
             amazonEnvelope.Message = updates.ToArray();
 
             var serializer = new XmlSerializer(amazonEnvelope.GetType());
-            
+
+            var stringReader = new StringWriter();
+            serializer.Serialize(stringReader, amazonEnvelope);
+            var xmlResult = stringReader.ToString();
+
             using (MemoryStream feedStream = new MemoryStream())
             {
                 serializer.Serialize(feedStream, amazonEnvelope);
@@ -51,10 +55,7 @@ namespace AmazonMWSClientLib.Implementation.Mws
                 // Calculating the MD5 hash value exhausts the stream, and therefore we must either reset the
                 // position, or create another stream for the calculation.
                 feedRequest.ContentMD5 = MarketplaceWebServiceClient.CalculateContentMD5(feedRequest.FeedContent);
-                var feedConfig = new MarketplaceWebServiceConfig { ServiceURL = AmazonServiceUrl };
                 
-                var feedService = new MarketplaceWebServiceClient(AmazonAccessKeyId, AmazonSecretAccessKey, "Virto", "1.01", feedConfig);
-
                 //var feedService = new MockMarketplaceWebServiceClient();
 
                 var uploadSuccess = false;

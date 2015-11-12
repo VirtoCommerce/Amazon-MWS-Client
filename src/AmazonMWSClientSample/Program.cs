@@ -21,7 +21,7 @@ namespace AmazonMWSClientSample
         //private const string secretAccessKey = "secretKey";
 
         static void Main(string[] args)
-        {
+        {            
             Console.WriteLine("===========================================");
             Console.WriteLine("Welcome to Marketplace Web Service Samples!");
             Console.WriteLine("===========================================");
@@ -211,37 +211,39 @@ namespace AmazonMWSClientSample
                 // local disk then upload them directly from disk to MWS.
                 
                 var amazonProduct = GenerateProduct();
-                var response = SubmitFeedSender.SendAmazonFeeds(new List<Product> { amazonProduct }, AmazonEnvelopeMessageType.Product, AmazonFeedType._POST_PRODUCT_DATA_, merchantId, marketplaceId, config.ServiceURL, accessKeyId, secretAccessKey);
-                
-                if (response.IsSetResponseMetadata())
+                var response = SubmitFeedSender.SendAmazonFeeds(new MockMarketplaceWebServiceClient(), new List<Product> { amazonProduct }, AmazonEnvelopeMessageType.Product, AmazonFeedType._POST_PRODUCT_DATA_, merchantId, marketplaceId, config.ServiceURL, accessKeyId, secretAccessKey);
+                if (response != null)
                 {
-                    Console.WriteLine("            ResponseMetadata");
-                    ResponseMetadata responseMetadata = response.ResponseMetadata;
-                    if (responseMetadata.IsSetRequestId())
+                    if (response.IsSetResponseMetadata())
                     {
-                        Console.WriteLine("                RequestId");
-                        Console.WriteLine("                    {0}", responseMetadata.RequestId);
-                    }                    
-                }
-
-                if (response.IsSetSubmitFeedResult())
-                {
-                    Console.WriteLine("            SubmitFeedResult");
-                    var submitFeedResult = response.SubmitFeedResult;
-                    if (submitFeedResult.FeedSubmissionInfo.IsSetFeedSubmissionId())
-                    {
-                        Console.WriteLine("                SubmissionId");
-                        Console.WriteLine("                    {0}", submitFeedResult.FeedSubmissionInfo.FeedSubmissionId);
+                        Console.WriteLine("            ResponseMetadata");
+                        ResponseMetadata responseMetadata = response.ResponseMetadata;
+                        if (responseMetadata.IsSetRequestId())
+                        {
+                            Console.WriteLine("                RequestId");
+                            Console.WriteLine("                    {0}", responseMetadata.RequestId);
+                        }
                     }
-                }
 
-                Console.WriteLine("            ResponseHeaderMetadata");
-                Console.WriteLine("                RequestId");
-                Console.WriteLine("                    " + response.ResponseHeaderMetadata.RequestId);
-                Console.WriteLine("                ResponseContext");
-                Console.WriteLine("                    " + response.ResponseHeaderMetadata.ResponseContext);
-                Console.WriteLine("                Timestamp");
-                Console.WriteLine("                    " + response.ResponseHeaderMetadata.Timestamp);
+                    if (response.IsSetSubmitFeedResult())
+                    {
+                        Console.WriteLine("            SubmitFeedResult");
+                        var submitFeedResult = response.SubmitFeedResult;
+                        if (submitFeedResult.FeedSubmissionInfo.IsSetFeedSubmissionId())
+                        {
+                            Console.WriteLine("                SubmissionId");
+                            Console.WriteLine("                    {0}", submitFeedResult.FeedSubmissionInfo.FeedSubmissionId);
+                        }
+                    }
+
+                    Console.WriteLine("            ResponseHeaderMetadata");
+                    Console.WriteLine("                RequestId");
+                    Console.WriteLine("                    " + response.ResponseHeaderMetadata.RequestId);
+                    Console.WriteLine("                ResponseContext");
+                    Console.WriteLine("                    " + response.ResponseHeaderMetadata.ResponseContext);
+                    Console.WriteLine("                Timestamp");
+                    Console.WriteLine("                    " + response.ResponseHeaderMetadata.Timestamp);
+                }
             }
 
 
@@ -472,7 +474,12 @@ namespace AmazonMWSClientSample
             amazonProduct.ExternalProductUrl = "http://demo.virtocommerce.com";
             amazonProduct.SKU = "SKU987654321";
             amazonProduct.StandardProductID = new StandardProductID { Value = amazonProduct.SKU, Type = StandardProductIDType.ASIN };
-            amazonProduct.ProductData = new ProductProductData { Item = new Home() };
+
+            var mainCat = new Home();
+            var subCat = new Kitchen();
+            mainCat.ProductType = new HomeProductType { Item = subCat };
+
+            amazonProduct.ProductData = new ProductProductData { Item = mainCat };
             
             return amazonProduct;
         }
